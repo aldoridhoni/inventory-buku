@@ -1,0 +1,46 @@
+<h2>Daftar Buku</h2>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>ISBN</th>
+        <th>Judul</th>
+        <th>Pengarang</th>
+        <th>Penerbit</th>
+        <th>Halaman</th>
+        <th>Kondisi</th>
+        <th>Tanggal Beli</th>
+        <th>Ubah</th>
+        <th>Hapus</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each data}}
+		<tr>
+      <td></td>
+			<td>{{isbn}}</td>
+			<td>{{title}}</a></td>
+			<td>{{_author.name}}</td>
+			<td>{{_publisher.name}}</td>
+			<td>{{pages}}</td>
+			<td>{{condition}}</td>
+			<td>{{format_date date 'DD-MM-YYYY'}}</td>
+			<td><a href="/book/{{id}}/change">
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+          <i class="fa fa-pencil fa-stack-1x fa-inverse fa-fw"></i>
+        </span>
+        </a></td>
+			<td><a href="/book/{{id}}/destroy" onclick="confirm('Yakin dihapus?')" id="hapus">
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-circle fa-stack-2x fa-fw"></i>
+          <i class="fa fa-trash fa-stack-1x fa-inverse fa-fw"></i>
+        </span></a></td>
+		</tr>
+    {{/each}}
+
+    </tbody>
+  </table>
+  <a class="btn btn-primary btn-outline" href="/book/create">
+  <i class="fa fa-plus-square"></i>
+  Tambah Buku</a>

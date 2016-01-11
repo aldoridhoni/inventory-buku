@@ -1,0 +1,30 @@
+{
+  "name": "inventori-buku",
+  "version": "0.0.1",
+  "authors": [
+    "Aldo Ridhoni <aldoridhoni@gmail.com>"
+  ],
+  "description": "Simple CRUD",
+  "main": "index.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "crud"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "jquery-validation": "~1.14.0",
+    "bootstrap": "~3.3.4",
+    "font-awesome": "~4.3.0"
+  },
+  "private": true
+}

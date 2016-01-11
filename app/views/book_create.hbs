@@ -1,0 +1,65 @@
+<div class="row">
+	<div class="col-lg-3">
+	</div>
+	<div class="col-lg-6">
+		<h2>{{title}}</h2>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-3">
+	</div>
+	<div class="col-lg-6">
+		<form method='post' id="book_create">
+			<div class="form-group">
+            	<label for="isbn">ISBN</label>
+            	<input type="text" class="form-control" name="isbn" id="isbn" value="{{data.isbn}}">
+            </div>
+            <div class="form-group">
+            	<label for="title">Judul Buku</label>
+            	<input type="text" class="form-control" name="title" id="title" value="{{data.title}}">
+            </div>
+            <div class="form-group">
+            	<label for="halaman">Jumlah Halaman</label>
+            	<input type="text" class="form-control" name="pages" id="pages" value="{{data.pages}}">
+            </div>
+            <div class="form-group">
+            	<label for="_author">Pengarang</label>
+                <select class="form-control" id="_author" name="_author">
+                    <option value="" selected>Please choose</option>
+                    {{#each _author}}
+                        <option value="{{_id}}" {{#xif ../data._author.name '==' name}}selected{{/xif}}>{{name}}</option>
+                    {{/each}}
+                </select>
+								<a class="add_data" href="/author/create"><i class="fa fa-plus-square fa-2x fa-fw"></i></a>
+            </div>
+						<div class="form-group">
+            	<label for="_publisher">Penerbit</label>
+                <select class="form-control" id="_publisher" name="_publisher">
+                    <option value="" selected>Please choose</option>
+                    {{#each _publisher}}
+                        <option value="{{_id}}" {{#xif ../data._publisher.name '==' name}}selected{{/xif}}>{{name}}</option>
+                    {{/each}}
+                </select>
+								<a class="add_data" href="/publisher/create"><i class="fa fa-plus-square fa-2x fa-fw"></i></a>
+            </div>
+            <div class="form-group">
+            	<label for="kondisi">Kondisi</label>
+            	<!-- <input type="text" class="form-control" name="condition" id="condition" value="{{book.condition}}"> -->
+							<select class="form-control" id="condition" name="condition">
+								<option value="New" {{#xif data.condition '==' 'New' }}selected{{/xif}}>New</option>
+								<option value="Fine" {{#xif data.condition '==' 'Fine' }}selected{{/xif}} >Fine</option>
+								<option value="Good" {{#xif data.condition '==' 'Good' }}selected{{/xif}} >Good</option>
+								<option value="Fair" {{#xif data.condition '==' 'Fair' }}selected{{/xif}} >Fair</option>
+								<option value="Poor" {{#xif data.condition '==' 'Poor' }}selected{{/xif}} >Poor</option>
+							</select>
+            </div>
+            <div class="form-group">
+            	<label for="tanggal">Tanggal Beli</label>
+            	<input type="date" class="form-control" name="date" id="date" placeholder="dd/mm/yyyy" value="{{format_date data.date 'YYYY-MM-DD'}}">
+            </div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <a class="btn btn-primary" href="/book">Batal</a>
+        </form>
+	</div>
+</div>
