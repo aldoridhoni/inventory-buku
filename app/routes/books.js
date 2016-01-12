@@ -11,7 +11,6 @@ router.get('/', function(req, res) {
     var populate_query = [{path:'_author', select:'name'}, {path:'_publisher', select:'name'}]
     Book.find({}).populate(populate_query).exec(function(err, buku) {
         if (err) throw err;
-        console.log(buku);
         res.render('book_list', { data: buku });
     });
 });
@@ -32,7 +31,6 @@ router.get('/create', function(req, res) {
 });
 
 router.post('/create', function(req, res) {
-    console.log(req.body);
     var buku = new Book(req.body);
     buku.save(function (err){
         if (err) console.log(err);
@@ -67,7 +65,6 @@ router.get('/:book_id([0-9a-z]+)/destroy', function(req, res) {
     //Book.find().remove({ _id: req.params.book_id}, function(err, find) {
     Book.findOneAndRemove({ _id: req.params.book_id}, function(err, find) {
       if (err) throw err;
-      console.log(find)
     });
     res.redirect('/book');
 });

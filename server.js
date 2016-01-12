@@ -46,21 +46,21 @@ app.get('/', function (req, res) {
 	res.render('home');
 });
 app.get('/favicon.ico', function (req, res) {
-    res.send('\n');
+		res.send('\n');
 });
 
 // Main loop
 connect()
-  .on('error', console.log)
-  .on('disconnected', connect)
-  .once('open', listen);
+	.on('error', console.log)
+	.on('disconnected', connect)
+	.once('open', listen);
 
 function listen () {
-  app.listen(port);
-  console.log('Express app started on port ' + port);
+	app.listen(port);
+	console.log('Express app started on port ' + port);
 }
 
 function connect () {
-  var options = {server: {socketOptions: {keepAlive: 1}}};
-  return mongoose.connect(config.db, options).connection;
+	var options = {server: {socketOptions: {keepAlive: 1}}};
+	return mongoose.connect(config.db, options).connection;
 }

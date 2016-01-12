@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
 
 router.get('/create', function(req, res) {
   if (req.query._popup == '1') {
-    res.render('author_create_popup', {layout: false});
+    res.render('author_create_popup', {title: 'Tambah Pengarang', layout: false});
   } else {
     res.render('author_create', {title: 'Tambah Pengarang', referrer: req.header('Referrer')});
   };
@@ -24,20 +24,20 @@ router.post('/create', function(req, res) {
   var name = req.body.name;
   var referrer = req.body.referrer;
   var pengarang = new Author({name: name});
-  pengarang.save(function(err) {
+  pengarang.save(function(err, data) {
     if (err) throw err;
+    if (req.xhr) {
+      res.send(data.id)
+    } else {
+      res.redirect( referrer || '/author');
+    }
   });
-  if (req.xhr) {
-    res.send('ok')
-  } else {
-    res.redirect( referrer || '/author');
-  }
+
 });
 
 router.get('/:author_id([0-9a-z]+)/destroy', function(req, res) {
   Author.findOneAndRemove({ _id: req.params.author_id}, function(err, find) {
     if (err) throw err;
-    console.log(find)
   });
   res.redirect('/author');
 });

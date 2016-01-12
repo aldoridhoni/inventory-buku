@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
 
 router.get('/create', function(req, res) {
   if (req.query._popup == '1') {
-    res.render('publisher_create_popup', {layout: false});
+    res.render('publisher_create_popup', {title: 'Tambah Penerbit', layout: false});
   } else {
     res.render('publisher_create', {title: 'Tambah Penerbit', referrer: req.header('Referrer')});
   };
@@ -26,20 +26,20 @@ router.post('/create', function(req, res) {
   var kota = req.body.kota;
   var referrer = req.body.referrer;
   var penerbit = new Publisher({name: name, alamat: alamat, kota: kota});
-  penerbit.save(function(err) {
+  penerbit.save(function(err, data) {
     if (err) throw err;
+    if (req.xhr) {
+      res.send(data.id)
+    } else {
+      res.redirect( referrer || '/publisher');
+    }
   });
-  if (req.xhr) {
-    res.send('ok')
-  } else {
-    res.redirect( referrer || '/publisher');
-  }
+  
 });
 
 router.get('/:publisher_id([0-9a-z]+)/destroy', function(req, res) {
   Publisher.findOneAndRemove({ _id: req.params.publisher_id}, function(err, find) {
     if (err) throw err;
-    console.log(find)
   });
   res.redirect('/publisher');
 });
