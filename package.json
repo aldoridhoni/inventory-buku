@@ -2,7 +2,7 @@
   "name": "cloud_tugas_akhir",
   "version": "1.0.0",
   "description": "Sebagai syarat penyelesaian kuliah PTCT.",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
     "express": "^4.13.3",
     "forever": "^0.15.1",
