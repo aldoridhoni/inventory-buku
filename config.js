@@ -1,7 +1,7 @@
 'use strict';
 
 var config = {
- 	db: 'mongodb://localhost/inventory'
+ 	db: 'mongodb://db/inventory'
 };
 
 module.exports = config; 

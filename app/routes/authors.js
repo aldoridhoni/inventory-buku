@@ -8,10 +8,18 @@ const Book = mongoose.model('Book');
 router.get('/', function(req, res) {
   Author.find({}).populate('books').exec(function(err, pengarang) {
     if (err) throw err;
-    res.render('author_list', {title: 'Daftar Pengarang', authors: pengarang})
+    var data = []; // empty array
+    pengarang.forEach(function(unit) {
+        Book.count({_author: unit.id}, function(err, count) {
+            unit['count'] = count;
+        });
+        data.push(unit);
+    });
+    res.render('author_list', {title: 'Daftar Pengarang', authors: data})
   });
 });
 
+// tambah data 
 router.get('/create', function(req, res) {
   if (req.query._popup == '1') {
     res.render('author_create_popup', {title: 'Tambah Pengarang', layout: false});
@@ -34,6 +42,7 @@ router.post('/create', function(req, res) {
   });
 
 });
+
 
 router.get('/:author_id([0-9a-z]+)/destroy', function(req, res) {
   Author.findOneAndRemove({ _id: req.params.author_id}, function(err, find) {

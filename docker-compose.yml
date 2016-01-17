@@ -2,11 +2,11 @@ db:
     image: mongo:latest
 web:
     image: node:latest
-    command: node server.js
+    command: node_modules/nodemon/bin/nodemon.js server.js
     volumes:
         - .:/usr/src/node
     ports:
-        - 3000:3000
+        - "3000:3000"
     links:
         - db
     working_dir: /usr/src/node    
